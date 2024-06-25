@@ -1,4 +1,4 @@
-## Angular & Spring Boot Expenses Dashborad 💹
+## Angular & Spring Boot Expenses Dashboard 💹
 
 The main function of this project is to record in the easiest way your **expenses** and **incomes** 💸📉. You can now easily manage your finances. 😁 
 
