@@ -1,0 +1,82 @@
+<p-toast [life]="2000" />
+
+<form [formGroup]="formHistorial" [style]="{'width': '25vw', 'min-width': '300px', 'margin': '0 auto', 'margin-bottom': '4vw'}">
+    <div class="field col-12 md:col-6">
+        <label for="keyword">Keyword:</label>
+        <input pInputText id="keyword" type="text" placeholder="Keyword..." formControlName="keyword" />
+    </div>
+    <div class="field col-12 md:col-6">
+        <label for="keyword">Date / Date Range:</label>
+            <p-calendar formControlName="rangeDates" selectionMode="range" [readonlyInput]="true" dateFormat="dd-mm-yy" pTooltip="Choose 1 or a range of dates"/>
+    </div>
+    <div class="field col-14 md:col-8" [style]="{'min-width': '200px'}">
+        <label for="categories">Categories:</label>
+        <div class="p-inputgroup" [style]="{ width: '50%', 'min-width': '200px'}">
+            <input pInputText id="category" type="text" formControlName="categoryTitle" />
+            <button pButton pRipple type="button" label="" icon="pi pi-search" pTooltip="Search Category"
+                (click)="openDynamicSelectCategory()"></button>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button class="search-button" severity="info" type="button" pButton pTooltip="Filter records" (click)="searchFilterRecords()"
+            [disabled]="isNotFirstSearching" icon="pi pi-search"></button>
+    
+        <button class="clean-button" severity="help" type="button" pButton pTooltip="Clean filters" (click)="cleanFiltersRecords()"
+            icon="pi pi-refresh"></button>
+    </div>
+</form>
+
+<p-table 
+    [value]="recordsList" 
+    [style]="{'width': '65vw', 'min-width': '800px', 'margin': '0 auto' }"
+    [rows]="5"
+    [paginator]="true"
+    [totalRecords]="totalRecords"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    lazy="true"
+    (onLazyLoad)="loadRecords($event)"
+    [loading]="loading"
+    [scrollable]="true"
+>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Note</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-record>
+        <tr>
+            <td style="width:10%">
+                {{record.id}}
+            </td>
+            <td style="width:10%">
+                <div [ngClass]="{'expense': record.amount < 0, 'income': record.amount > 0}">
+                    {{record.amount | currency:'USD'}}
+                </div>
+            </td >
+            <td style="width:15%">
+                {{record.category}}
+            </td>
+            <td style="width:30%">
+                {{record.note}}
+            </td>
+            <td style="width:5%">
+                <p-tag [value]="record.type" [severity]="getSeverity(record.type)" />
+            </td>
+            <td style="width:30%">
+                <p-button [style]="{'margin-right': '10px'}" severity="info" pTooltip="Edit Record" (onClick)="openDynamicFormUpdateRecord(record.id)"><i class="pi pi-pen-to-square"></i></p-button>
+                <p-button severity="danger" (onClick)="deleteRecord(record.id)" pTooltip="Delete Record"><i class="pi pi-trash"></i></p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<div #dynamicSelectCategory></div>
+
+<div #dynamicFormRecord></div>

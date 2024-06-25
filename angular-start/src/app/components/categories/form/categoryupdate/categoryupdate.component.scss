@@ -1,0 +1,28 @@
+.field {
+    margin-bottom: 10px;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        margin-top: 20px;
+    }
+
+    input, textarea {
+        width: 100%;
+    }
+}
+
+.counter {
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.save-button {
+    display: block;
+    margin: 0 auto;
+    width: 10vw;
+}
+
+.half-width {
+    width: 50%;
+}

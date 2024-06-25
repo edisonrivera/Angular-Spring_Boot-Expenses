@@ -1,0 +1,29 @@
+<p-toast [life]="2000" />
+<p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '70vw', 'min-width': '900px'}" [draggable]="false" [resizable]="false">
+  <h2>Register a new record</h2>
+  <form [formGroup]="formRecord">
+    <div class="field col-12 md:col-6">
+      <label for="amount">Amount:</label>
+      <input pInputText type="text" placeholder="99999.99" formControlName="amount"
+              pattern="^[0-9]{1,8}(\.[0-9]{1,2})?$" required />
+    </div>
+    <div class="field col-12 md:col-6">
+      <label for="note">Note:</label>
+      <textarea rows="5" cols="30" pInputTextarea [autoResize]="true" placeholder="Note..."
+                (input)="updateCounterNote($event)" formControlName="note" maxlength="100"></textarea>
+    </div>
+    <div class="counter">{{ counterNote }} / 100</div>
+    <div class="field col-12 md:col-6">
+      <label for="categories">Categories:</label>
+      <div class="p-inputgroup" [style]="{ width: '30%'}">
+        <input pInputText id="category" type="text" formControlName="categoryTitle"/>
+        <button pButton pRipple type="button" label="" icon="pi pi-search" pTooltip="Search Categories" (click)="openDynamicSelectCategory()"></button>
+      </div>
+    </div>
+    <button class="save-button" severity="success" type="button" icon="pi pi-save" pButton pTooltip="Save Record" (click)="saveRecord()" [disabled]="isNotFirstSaved"></button>
+  </form>
+</p-dialog>
+
+<div class="selectCategory">
+  <div #dynamicSelectCategory></div>
+</div>

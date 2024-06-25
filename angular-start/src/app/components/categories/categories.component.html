@@ -1,0 +1,54 @@
+<p-toast [life]="2000" />
+<p-toolbar [style]="{'width': '65vw', 'min-width': '800px', 'margin': '0 auto'}">
+    <ng-template pTemplate="right">
+        <p-button 
+            pRipple 
+            severity="success" 
+            icon="pi pi-plus" 
+            class="mr-2" 
+            pTooltip="Add New Category"
+            (onClick)="openDynamicFormCategory()"/>
+    </ng-template>
+</p-toolbar>
+<p-table 
+    [value]="categoriesList"
+    [style]="{'width': '65vw', 'min-width': '800px', 'margin': '0 auto'}" [rows]="5"
+    [paginator]="true"
+    [totalRecords]="totalCategories"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    lazy="true"
+    (onLazyLoad)="loadData($event)"
+    [loading]="loading"
+    [scrollable]="true"
+>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-category>
+        <tr>
+            <td style="width:8%">
+                {{category.id}}
+            </td>
+            <td style="width:45%">
+                {{category.title}}
+            </td>
+            <td style="width:5%">
+                <p-tag [value]="category.name" [severity]="getSeverity(category.name)" />
+            </td>
+            <td style="width:20%">
+                <p-button [style]="{'margin-right': '10px'}" severity="info" pTooltip="Edit Category" (onClick)="openDynamicFormUpdateRecord(category.id)"><i
+                        class="pi pi-pen-to-square"></i></p-button>
+                <p-button severity="danger" (onClick)="deleteCategory(category.id)" pTooltip="Delete Category"><i
+                        class="pi pi-trash"></i></p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<div #dynamicFormCategory></div>

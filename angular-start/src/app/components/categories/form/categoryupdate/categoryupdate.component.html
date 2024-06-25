@@ -1,0 +1,19 @@
+<p-toast [life]="2000" />
+<p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '10vw', 'min-width': '700px', height: '440px'}" [draggable]="false"
+    [resizable]="false">
+    <h2>Update Category</h2>
+    <form [formGroup]="formUpdate">
+        <div class="field col-12 md:col-6">
+            <label for="note">Title:</label>
+            <input rows="5" cols="30" pInputText placeholder="Title..." formControlName="title" maxlength="30"/>
+        </div>
+        <label for="type-categories">Type of Category:</label>
+
+        <div class="field col-12 md:col-6" [style]="{'margin-top': '5px'}">
+            <p-dropdown [options]="typeCategoriesOptions" placeholder="Select a Type Category" pTooltip="Select at least one Type Category"
+            optionValue="id" optionLabel="value" formControlName="typeId" [style]="{'width': '260px'}"></p-dropdown>   
+        </div>
+        <button class="save-button" severity="info" icon="pi pi-save" type="button" pButton pTooltip="Save Category" [disabled]="isNotFirstSaved"
+            (click)="updateCategory()"></button>
+    </form>
+</p-dialog>

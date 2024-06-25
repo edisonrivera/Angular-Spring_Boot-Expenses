@@ -1,0 +1,102 @@
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.col {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+}
+
+
+p-chart {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+}
+
+
+.balances {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.item {
+    margin: 10px;
+}
+
+.form-date{
+    display: flex;
+    justify-content: center;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+@media (min-width: 601px) {
+    .form-field {
+        flex-direction: row;
+    }
+
+    .buttons {
+        margin-top: 0;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .balances {
+        flex-direction: column;
+    }
+
+    .item {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .row {
+        justify-content: space-around;
+    }
+}
+
+
+@media (max-width: 767px) {
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .col {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+}

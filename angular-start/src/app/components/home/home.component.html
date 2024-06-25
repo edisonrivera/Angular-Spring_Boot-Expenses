@@ -1,0 +1,47 @@
+<p-toast [life]="2000" />
+
+<div class="balances">
+    <div class="item">
+        <h3>Balance</h3>
+        <p-tag severity="info" [value]="balance" [style]="{'font-size': '20px', 'padding': '10px', 'width': '200px'}"></p-tag>
+    </div>
+
+    <div class="item">
+        <h3>Total Amount</h3>
+        <p-tag severity="success" [value]="amount" [style]="{'font-size': '20px', 'padding': '10px', 'width': '200px'}"></p-tag>
+    </div>
+
+    <div class="item">
+        <h3>Total Expense</h3>
+        <p-tag severity="warning" [value]="expense" [style]="{'font-size': '20px', 'padding': '10px', 'width': '200px'}"></p-tag>
+    </div>
+</div>
+
+<div class="grid-container">
+    <div class="row">
+        <div class="col">
+            <p-chart type="pie" [data]="dataAmount" [options]="optionsAmount"></p-chart>
+        </div>
+        <div class="col">
+            <p-chart type="pie" [data]="dataExpenses" [options]="optionsExpenses"></p-chart>
+        </div>
+    </div>
+
+    <h3 [style]="{'text-align': 'center', 'margin-top': '100px'}">Stadistics per week</h3>
+
+    <form [formGroup]="formDate" class="form-date" [style]="{'width': '25vw', 'min-width': '50vw'}">
+        <div class="form-field">
+            <p-calendar formControlName="date" [readonlyInput]="true" dateFormat="yy-mm-dd"></p-calendar>
+            <div class="buttons">
+                <button pButton pRipple type="button" label="" icon="pi pi-search" pTooltip="Search by date"
+                        (click)="loadWeekRecords()"></button>
+                <button pButton pRipple type="button" severity="info" label="" icon="pi pi-refresh" pTooltip="Refresh with current date"
+                        (click)="refreshWithCurrentDate()"></button>
+            </div>
+        </div>
+    </form>
+
+    <div class="card" [style]="{'width': '100%'}">
+        <p-chart type="line" [data]="dataWeek" [options]="optionsWeek" />
+    </div>
+</div>

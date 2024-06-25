@@ -1,0 +1,27 @@
+<p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '40vw', 'min-width': '500px'}" 
+[draggable]="false" [resizable]="false">
+    <p-table #dt [value]="categoriesList" dataKey="id" [rows]="5" [paginator]="true" 
+    [globalFilterFields]="['title']" [scrollable]="true" (onLazyLoad)="loadData($event)"
+    [loading]="loading" [totalRecords]="totalCategories" lazy="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Select</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-category>
+            <tr>
+                <td style="width: 10%">
+                    {{category.id}}
+                </td>
+                <td style="width: 60%">
+                    {{category.title}}
+                </td>
+                <td style="width: 10%" class="text-center">
+                  <button pButton pRipple icon="pi pi-check" class="p-button-text" (click)="selectCategory(category.id, category.title)" pTooltip="Select this"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+  </p-dialog>
